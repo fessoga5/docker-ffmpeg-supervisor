@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y --force-yes curl && \
     supervisor \
     git \
     rsyslog \
-    python-yaml \
+    python-yaml && \
     mkdir -p /var/run/sshd && \
     mkdir -p /home/www && \
     chown www-data:www-data -R /home/www && \
@@ -30,11 +30,6 @@ RUN chmod 755 /start.sh
 # Create user, adding for group. Working for ssh
 RUN /usr/sbin/useradd -d /home/ubuntu -s /bin/bash -p $(echo ubuntu | openssl passwd -1 -stdin) ubuntu &&\
 /usr/sbin/usermod -a -G sudo ubuntu
-
-# Add scripts
-#ADD run.sh /run.sh
-ADD scripts/set_rabbitmq_password.sh /set_rabbitmq_password.sh
-RUN chmod 755 ./*.sh
 
 # Get timezone
 RUN echo "Asia/Irkutsk" | tee /etc/timezone && \
