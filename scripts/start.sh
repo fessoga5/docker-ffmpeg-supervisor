@@ -51,7 +51,7 @@ esac
 logger -t "docker-ffmpeg-supervisor" "Start command: $TEMPLATE_LIST"
 
 TEMPLATE_SUPERVISOR="[program:ffmpeg]\ncommand=$TEMPLATE_LIST\nautostart=true\nautorestart=true\nstartretries=100000000\nstdout_logfile=/dev/stdout\nstdout_logfile_maxbytes=0\nstderr_logfile=syslog\n"
-printf $TEMPLATE_SUPERVISOR > /etc/supervisor/conf.d/ffmpeg.conf
+printf "$TEMPLATE_SUPERVISOR" > /etc/supervisor/conf.d/ffmpeg.conf
 
 # Start supervisord and services
 /usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf
